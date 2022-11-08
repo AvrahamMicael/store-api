@@ -1,0 +1,19 @@
+const connectDB = require('./db/connect');
+const Product = require('./models/Product');
+const jsonProducts = require('./products.json');
+
+(async () => {
+  try
+  {
+    await connectDB();
+    await Product.deleteMany();
+    await Product.create(jsonProducts);
+    console.log('success');
+    process.exit(0);
+  }
+  catch(error)
+  {
+    console.log(error);
+    process.exit(1);
+  }
+})();
